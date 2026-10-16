@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { generate, findConflicts, sample } from "./scheduler";
+import { generate, findConflicts, sample } from "@/lib/scheduler";
 
 describe("scheduler", () => {
   it("produces a timetable with no double bookings", () => {
