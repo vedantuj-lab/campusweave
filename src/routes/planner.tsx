@@ -19,14 +19,14 @@ const inputCls = "w-full rounded border bg-background px-2 py-1 text-sm";
 function Planner() {
   const [data, setData] = useState<Input>(sample);
   const [result, setResult] = useState(() => generate(sample));
-  const [groupId, setGroupId] = useState(sample.groups[0].id);
+  const [groupId, setGroupId] = useState(sample.groups[0]!.id);
   const conflicts = useMemo(() => findConflicts(data, result.sessions), [data, result]);
   const name = (list: { id: string; name: string }[], id: string) => list.find((x) => x.id === id)?.name ?? "?";
 
   const update = (id: string, patch: Partial<Course>) =>
     setData((d) => ({ ...d, courses: d.courses.map((c) => (c.id === id ? { ...c, ...patch } : c)) }));
   const add = () =>
-    setData((d) => ({ ...d, courses: [...d.courses, { id: `c${Date.now()}`, name: "New course", teacherId: d.teachers[0].id, groupId: d.groups[0].id, hours: 2, lab: false }] }));
+    setData((d) => ({ ...d, courses: [...d.courses, { id: `c${Date.now()}`, name: "New course", teacherId: d.teachers[0]!.id, groupId: d.groups[0]!.id, hours: 2, lab: false }] }));
   const remove = (id: string) => setData((d) => ({ ...d, courses: d.courses.filter((c) => c.id !== id) }));
 
   return (
